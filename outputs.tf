@@ -1,19 +1,19 @@
-output "nginx_id" {
-    value = "${docker_image.nginx.latest}"
+output "mongodb_image_id" {
+    value = "${docker_image.mongodb.latest}"
 }
 
-output "nginx_ip_address" {
-    value = "${docker_container.nginx.ip_address}"
+output "mongodb_ip_address" {
+    value = "${docker_container.mongodb.ip_address}"
 }
 
-output "nginx_ip_prefix_length" {
-    value = "${docker_container.nginx.ip_prefix_length}"
+output "mongodb_ip_prefix_length" {
+    value = "${docker_container.mongodb.ip_prefix_length}"
 }
 
-output "nginx_gateway" {
-    value = "${docker_container.nginx.gateway}"
+output "mongodb_gateway" {
+    value = "${docker_container.mongodb.gateway}"
 }
 
-output "nginx_bridge" {
-    value = "${docker_container.nginx.bridge}"
+output "mongodb_bridge" {
+    value = "${docker_container.mongodb.bridge}"
 }
