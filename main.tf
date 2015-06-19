@@ -70,3 +70,37 @@ resource "docker_container" "mysql" {
    env = ["MYSQL_ROOT_PASSWORD=sa", "MYSQL_USER=mysql", "MYSQL_PASSWORD=mysql", "MYSQL_DATABASE=sushe"]
 }
 
+resource "docker_container" "rabbitmq-data" {
+   image = "${docker_image.busybox.latest}"
+   name = "rabbitmq-data"
+   hostname = "rabbitmq-data"
+   must_run = false
+   volumes {
+       container_path = "/var/lib/rabbitmq"
+   }
+}
+
+resource "docker_image" "rabbitmq" {
+   name = "rabbitmq:management"
+   keep_updated = true
+}
+
+resource "docker_container" "rabbitmq" {
+   image = "${docker_image.rabbitmq.latest}"
+   name = "rabbitmq"
+   hostname = "rabbitmq"
+   must_run = true
+   volumes {
+       from_container = "rabbitmq-data"
+   }
+   ports {
+       internal = 5672
+       external = 5672
+   }
+   ports {
+       internal = 15672
+       external = 15672
+   }
+}
+
+
